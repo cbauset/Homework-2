@@ -62,3 +62,11 @@ data %>%
 ## **Data description**
 
 We could observe that human colonic fibroblasts treatment with TWK or IL1a induced very little the expression of the proinflammatory chemokine CCL5. However, when fibroblasts were sequentially exposed to both cytokines, there was an abrupt upregulation in the gene expression levels of CCL5.
+
+
+::: {.callout-note}
+### Summary
+This section describes how cytokine treatments affect CCL5 expression levels in intestinal fibroblasts.
+:::
+
+
