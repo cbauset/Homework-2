@@ -1,0 +1,64 @@
+---
+title: "Homework1"
+author: "Cristina Bauset"
+date: today
+date-format: long
+format: html
+editor: visual
+---
+
+## **Intorduction**
+
+Intestinal fibroblasts are structural stromal cells that under [inflammatory]{style="color: red;"} conditions, they may acquire immunomodulatory properties. We stimualted human colonic fibroblasts with two different cytokines, [TWEAK]{style="color: #87AD22"} and [IL1a]{style="color: #21B7A2"}, and we also observed the effects when fibroblasts where sequentially treated with [both]{style="color: #D243DE"}.
+
+```{r, echo=FALSE, include=FALSE}
+# Dataset
+library(tidyverse)
+
+#Read dataset
+data <- read_csv("Homework1_dataset.csv") %>%
+  select(veh, everything()) %>%
+  mutate(veh = factor(veh, levels = c("veh", "TWK", "IL1a", "TWK+IL1a")))
+```
+
+## **CCL5 gene expression in human fibroblasts**
+
+::::: columns
+::: {.column width="60%"}
+### *Graph*
+
+Effects of stimulating human intestinal fibroblasts with the cytokines TWEAK and IL1a in the expression of CCL5 gene were ploted using the package
+
+```{r}
+library(ggplot2)
+```
+
+```{r, echo=FALSE}
+ggplot(data, aes(x = veh, y = `0.82`, fill = veh)) +
+  geom_col() +
+  labs(title = "CCL5 gene expression", x = "Treatment", y = "Fold induction") +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"), axis.title.x = element_text(size = 14), axis.title.y = element_text(size = 14),axis.text.x = element_text(size = 12), axis.text.y = element_text(size = 12)) +
+  scale_fill_discrete(name = NULL)
+```
+:::
+
+::: {.column width="40%"}
+### *Descriptive statistics*
+
+```{r, echo=FALSE}
+library(knitr)
+
+data %>%
+  group_by(veh) %>%
+  summarise(
+    Mean = mean(`0.82`),
+    SD = sd(`0.82`),
+  ) %>%
+  kable(caption = "Descriptive statistics per group")
+```
+:::
+:::::
+
+## **Data description**
+
+We could observe that human colonic fibroblasts treatment with TWK or IL1a induced very little the expression of the proinflammatory chemokine CCL5. However, when fibroblasts were sequentially exposed to both cytokines, there was an abrupt upregulation in the gene expression levels of CCL5.
